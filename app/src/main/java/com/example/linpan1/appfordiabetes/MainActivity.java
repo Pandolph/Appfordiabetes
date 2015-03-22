@@ -4,6 +4,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVOSCloud;
 import com.avos.avoscloud.AVAnalytics;
 import com.avos.avoscloud.AVObject;
@@ -15,13 +17,19 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-            //如果使用美国节点，请加上这行代码 AVOSCloud.useAVCloudUS();
-            AVOSCloud.initialize(this, "2s4amu2ol6y6j369flxy4orr38o4rtpoj2tldfvx4yk1945g", "x0wktubwarcb37tp4i3mhxvlbgaretjaxxiakua3mcjjt3ft");
 
-            AVAnalytics.trackAppOpened(getIntent());
-        AVObject testObject = new AVObject("TestObject");
-        testObject.put("foo", "bar");
-        testObject.saveInBackground();
+
+        AVObject healthObject = new AVObject("HealthObject");
+        healthObject.put("xuetang", "1");
+        healthObject.put("xueya", "2");
+        healthObject.put("xuezhi", "3");
+        healthObject.put("ganshen", "4");
+        healthObject.put("yundong", "5");
+        try{
+            healthObject.save();
+        }catch (AVException e){
+            e.getMessage();
+        }
     }
 
 
